@@ -4,6 +4,8 @@ deploy:
   secret_access_key:
     secure: OPhdSmcNNcc6WxGWKR8hiUjd2+gjclbAalyoPIm0XDdTpPNQWbmnC44vW7X0GCmGlpvTz3p+UActCgTlQ5XMcpiCQfYUXL7gFSx9uoTe0JE+C8MUdOr2QfQN7FxCRNWYpTFIbk31jtVEVWx9N4Xlm2rq67VF98Qtdyme0Vl0jUIu9ZvWduXmxyoczqQ0GtDioOUy77L4epvEjXrSiGQHhV4lpKHPEIK+umyfVAHr+/B+h2s4SxjrWsvmmaIyPxxs1j+RNU8bc5o9mpeaEmy9vZzxc2uR8n+FCRGjg4Bd6xUo3lY5WFjd8hqF6djCMiaMgUiH803mIXPM8GCOQi5YrjD4dhTe/7w9tnjWH6bTmHa/IRJLyHeyG0X27TtV1kmCBrIWTRF2WIyjC26ZWkIJsfyox5nbVvsZLP+rVIUjv21+fUx0BbamiNVC+PvIU2WO0IWqBe3ysNEXLzGXa0e8TKs9xb9L/cT5yNWhQTWwtGMHErDxLU/ZhARYqV7YSUruU2FQXYcjHX5xQtulezbqgx+/tta1sVG66pJJ4eVfzXmkxbOq9cuTGvtvk8C0rRWoCWgjaReZn+7Rp/SNY+tQ2AMl5mVqQ3kx7LlulOzJE7m83mr0SGVM1q+xcBeb8uDI5g5fpyrs6je5CCObuarxUo1bVJhR1Y5AzPILVeV63mo=
   bucket: cube5.contacts-app.io
+  skip_cleanup: true
+  local_dir: client
   acl: ''
   on:
     repo: cube5/contacts-app
