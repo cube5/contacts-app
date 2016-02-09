@@ -1,4 +1,4 @@
-Sample Contacts app using Firebasen, AngularJS & ES6
+Sample Contacts app using Firebase, AngularJS & ES6
 =====================================================
 
 This repo serves as a minimal starter for those looking to get up-and-running with Angular and ES6, using [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/) for the build process.
@@ -137,6 +137,7 @@ Because the argument to `--name` applies to the folder name **and** the actual c
 
 <br><br>
 Credits:
+<br><br>
 [![AngularClass](https://cloud.githubusercontent.com/assets/1016365/9863770/cb0620fc-5af7-11e5-89df-d4b0b2cdfc43.png  "Angular Class")](https://angularclass.com)
 ##[AngularClass](https://angularclass.com)
 > The de facto starter repo for building scalable apps with [Angular](https://angularjs.org), [ES6](https://git.io/es6features), and [Webpack](http://webpack.github.io/)
