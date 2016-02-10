@@ -11,11 +11,24 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <!--<base href="/">-->
   </head>
-  <body ng-cloak>
-
-    <app>
-      Loading...
-    </app>
+  <body layout="row" ng-cloak>
+    
+    <md-sidenav class="md-sidenav md-sidenav-left md-whiteframe-z2"
+      md-component-id="left"
+      ng-click="vm.toggleLeft()" aria-label="Show Contact List"
+      md-is-locked-open="$mdMedia('gt-sm')">
+      
+      <md-toolbar class="md-whiteframe-z1">
+        <h3>Contacts</h3>
+      </md-toolbar>
+      
+    </md-sidenav>
+    
+    <div flex layout="column" tabindex="-1" role="main" class="md-whiteframe-z2">
+      <app>
+        Loading...
+      </app>
+    </div>
     
     <script src="../bundle.js"></script>
     

@@ -1,13 +1,27 @@
 <!-- Place all UI elements intended to be present across all routes in this file -->
-<div class="app">
-  <div class="container">
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>Contacts app</h1>
-        <hr/>
-        <a ui-sref="contacts">See Contacts</a>
-      </div>
-    </div>
-    <div ui-view></div>
+<md-toolbar layout="row" class="md-whiteframe-z1">
+  <md-button id="main" class="menu" hide-gt-sm ng-click="vm.toggleLeft()" ariallabel="Show Contact List">
+    <md-icon md-svg-icon="menu"></md-icon>
+  </md-button>
+  <h3>Contacts app</h3>
+</md-toolbar>
+
+<md-content flex id="content">
+  <div ui-view>
+    <a ui-sref="contacts">See Contacts</a>
   </div>
-</div>
+</md-content>
+
+<!--<div class="app">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="large-12 columns">-->
+<!--        <h1>Contacts app</h1>-->
+<!--        <hr/>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div ui-view>-->
+<!--      <a ui-sref="contacts">See Contacts</a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
