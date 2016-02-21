@@ -9,18 +9,21 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="description" content="NG6-Starter by @AngularClass">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <!--<base href="/">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
   </head>
-  <body layout="row" ng-cloak>
+  <body layout="row" class="ng-cloak" ng-cloak>
     
     <md-sidenav class="md-sidenav md-sidenav-left md-whiteframe-z2"
       md-component-id="left"
       ng-click="vm.toggleLeft()" aria-label="Show Contact List"
       md-is-locked-open="$mdMedia('gt-sm')">
       
-      <md-toolbar class="md-whiteframe-z1">
+      <md-toolbar layout="row" class="md-whiteframe-z1">
         <h3>Contacts</h3>
       </md-toolbar>
+      
+      <contact-list contacts="vm.contacts"></contact-list>
       
     </md-sidenav>
     
@@ -28,6 +31,28 @@
       <app>
         Loading...
       </app>
+      <!--<md-progress-circular class="md-accent" md-mode="indeterminate" md-diameter="96"></md-progress-circular>-->
+      <md-fab-speed-dial class="md-scale md-fab-bottom-right" md-open="false" md-direction="up">
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab md-primary">
+            <i class="fa fa-bars fa-lg"></i>
+          </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+          <md-button class="md-fab md-raised md-mini"
+            aria-label="List"
+            ui-sref="contacts"
+            title="View Contacts">
+            <i class="fa fa-list fa-lg"></i>
+          </md-button>
+          <md-button class="md-fab md-raised md-mini"
+            aria-label="Add"
+            ui-sref="new"
+            title="Add contact">
+            <i class="fa fa-plus fa-lg"></i>
+          </md-button>
+        </md-fab-actions>
+      </md-fab-speed-dial>
     </div>
     
     <script src="../bundle.js"></script>

@@ -1,0 +1,48 @@
+<div>
+  <h1>Contact Details</h1>
+</div>
+
+<form ng-if="vm.contact" name="contactForm" ng-submit="vm.update()">
+  <div layout="row">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label><i class="fa fa-male fa-lg"></i> Name</label>
+      <input ng-disabled="!vm.isEditing" ng-model="vm.contact.name">
+    </md-input-container>
+    <md-datepicker ng-disabled="!vm.isEditing" ng-model="vm.contact.birthday"
+      md-placeholder="Birthday"
+      md-min-date="vm.minDate"
+      md-max-date="vm.maxDate">
+    </md-datepicker>
+  </div>
+  <md-input-container class="md-block">
+    <label><i class="fa fa-envelope fa-lg"></i> Email</label>
+    <input ng-disabled="!vm.isEditing" ng-model="vm.contact.email">
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label><i class="fa fa-twitter fa-lg"></i> @Twitter</label>
+    <input ng-disabled="!vm.isEditing" ng-model="vm.contact.twitter">
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label><i class="fa fa-map-marker fa-lg"></i> Address</label>
+    <input ng-disabled="!vm.isEditing" ng-model="vm.contact.address">
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label><i class="fa fa-heart fa-lg"></i> About yourself</label>
+    <textarea ng-disabled="!vm.isEditing"
+      ng-model="vm.contact.sumary"
+      md-maxlength="100"
+      rows="5">
+    </textarea>
+  </md-input-container>
+  <md-button ng-if="!vm.isEditing" ng-click="vm.isEditing = true"
+    class="md-raised md-primary" type="button">
+    Edit
+  </md-button>
+  <md-button ng-if="vm.isEditing" class="md-raised md-primary" type="submit">
+    Update
+    </md-button>
+</form>
+
+<div ng-if="!vm.contact">
+  <h5>No data found...</h5>
+</div>

@@ -72,23 +72,21 @@
 	
 	var _componentsComponents2 = _interopRequireDefault(_componentsComponents);
 	
-	var _appComponent = __webpack_require__(40);
+	var _appComponent = __webpack_require__(35);
 	
 	var _appComponent2 = _interopRequireDefault(_appComponent);
 	
-	__webpack_require__(46);
+	__webpack_require__(41);
 	
-	__webpack_require__(48);
+	__webpack_require__(43);
 	
-	__webpack_require__(50);
+	__webpack_require__(45);
 	
 	console.log('app module');
-	_angular2['default'].module('app', [_angularUiRouter2['default'], _angularMaterial2['default'], _coreCore2['default'], _componentsComponents2['default']]).config(function ($urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
+	_angular2['default'].module('app', [_angularUiRouter2['default'], _angularMaterial2['default'], _coreCore2['default'], _componentsComponents2['default']]).config(function ($urlRouterProvider, $mdThemingProvider) {
 	  $urlRouterProvider.otherwise('/');
 	
 	  $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('pink');
-	
-	  $mdIconProvider.defaultIconSet("./assets/svg/avatars.svg", 128).icon("menu", __webpack_require__(52), 24).icon("share", "./assets/svg/share.svg", 24).icon("google_plus", "./assets/svg/google_plus.svg", 512).icon("hangouts", "./assets/svg/hangouts.svg", 512).icon("twitter", "./assets/svg/twitter.svg", 512).icon("phone", "./assets/svg/phone.svg", 512);
 	}).component('app', _appComponent2['default']);
 	
 	_angular2['default'].element(document).ready(function () {
@@ -64151,11 +64149,11 @@
 	
 	var _angularfire2 = _interopRequireDefault(_angularfire);
 	
-	var _contactsServiceJs = __webpack_require__(16);
+	var _dataServiceJs = __webpack_require__(16);
 	
-	var _contactsServiceJs2 = _interopRequireDefault(_contactsServiceJs);
+	var _dataServiceJs2 = _interopRequireDefault(_dataServiceJs);
 	
-	exports['default'] = angular.module('app.services', ['firebase']).factory('ContactsFactory', _contactsServiceJs2['default']).name;
+	exports['default'] = angular.module('app.services', ['firebase']).factory('dataService', _dataServiceJs2['default']).name;
 	module.exports = exports['default'];
 
 /***/ },
@@ -66743,25 +66741,17 @@
 	  value: true
 	});
 	
-	exports['default'] = function ($firebaseArray, $q) {
+	exports['default'] = function ($firebaseArray) {
 	  var ref = new Firebase('https://cube5-contacts-app.firebaseio.com/contacts');
 	  var contacts = $firebaseArray(ref);
 	  return {
-	    save: save,
+	    add: add,
 	    update: update,
 	    remove: remove,
-	    get: get,
 	    getContacts: getContacts
 	  };
 	
-	  function get(id) {
-	    console.log('retreiving contact whit id: ', id);
-	    console.log('contacts: ', contacts);
-	    return contacts.$getRecord(id);
-	  }
-	
-	  function save(contact) {
-	    console.log('saving contact: ', contact);
+	  function add(contact) {
 	    return contacts.$add(contact).then(function (ref) {
 	      var id = ref.key();
 	      console.log('Added contact with ID: ' + id);
@@ -66769,7 +66759,6 @@
 	  }
 	
 	  function update(contact) {
-	    console.log('updating contact: ', contact);
 	    return contacts.$save(contact).then(function (ref) {
 	      var id = ref.key();
 	      console.log('Updated contact with ID: ' + id);
@@ -66777,52 +66766,15 @@
 	  }
 	
 	  function remove(contact) {
-	    console.log('removing contact: ', contact);
 	    var id = contact.$id;
 	    return contacts.$remove(contact).then(function (ref) {
-	      console.log('Removed contact with ID: ' + id);
+	      console.log('Updated contact with ID: ' + id);
 	    });
 	  }
 	
 	  function getContacts() {
 	    return contacts;
 	  }
-	
-	  // function getContacts() {
-	  //   let users = [
-	  //     {
-	  //       name: 'Lia Lugo',
-	  //       avatar: 'svg-1',
-	  //       content: 'I love cheese, especially airedale queso. Cheese and biscuits halloumi cauliflower cheese cottage cheese swiss boursin fondue caerphilly. Cow port-salut camembert de normandie macaroni cheese feta who moved my cheese babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue castello caerphilly chalk and cheese. Lancashire.'
-	  //     },
-	  //     {
-	  //       name: 'George Duke',
-	  //       avatar: 'svg-2',
-	  //       content: 'Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.'
-	  //     },
-	  //     {
-	  //       name: 'Gener Delosreyes',
-	  //       avatar: 'svg-3',
-	  //       content: "Raw denim pour-over readymade Etsy Pitchfork. Four dollar toast pickled locavore bitters McSweeney's blog. Try-hard art party Shoreditch selfies. Odd Future butcher VHS, disrupt pop-up Thundercats chillwave vinyl jean shorts taxidermy master cleanse letterpress Wes Anderson mustache Helvetica. Schlitz bicycle rights chillwave irony lumberhungry Kickstarter next level sriracha typewriter Intelligentsia, migas kogi heirloom tousled. Disrupt 3 wolf moon lomo four loko. Pug mlkshk fanny pack literally hoodie bespoke, put a bird on it Marfa messenger bag kogi VHS."
-	  //     },
-	  //     {
-	  //       name: 'Lawrence Ray',
-	  //       avatar: 'svg-4',
-	  //       content: 'Scratch the furniture spit up on light gray carpet instead of adjacent linoleum so eat a plant, kill a hand pelt around the house and up and down stairs chasing phantoms run in circles, or claw drapes. Always hungry pelt around the house and up and down stairs chasing phantoms.'
-	  //     },
-	  //     {
-	  //       name: 'Ernesto Urbina',
-	  //       avatar: 'svg-5',
-	  //       content: 'Webtwo ipsum dolor sit amet, eskobo chumby doostang bebo. Bubbli greplin stypi prezi mzinga heroku wakoopa, shopify airbnb dogster dopplr gooru jumo, reddit plickers edmodo stypi zillow etsy.'
-	  //     },
-	  //     {
-	  //       name: 'Gani Ferrer',
-	  //       avatar: 'svg-6',
-	  //       content: "Lebowski ipsum yeah? What do you think happens when you get rad? You turn in your library card? Get a new driver's license? Stop being awesome? Dolor sit amet, consectetur adipiscing elit praesent ac magna justo pellentesque ac lectus. You don't go out and make a living dressed like that in the middle of a weekday. Quis elit blandit fringilla a ut turpis praesent felis ligula, malesuada suscipit malesuada."
-	  //     }
-	  //   ];
-	  //   return $q.when(users);
-	  // }
 	};
 	
 	module.exports = exports['default'];
@@ -95473,37 +95425,29 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _formContactFormJs = __webpack_require__(27);
-	
-	var _formContactFormJs2 = _interopRequireDefault(_formContactFormJs);
-	
-	var _listContactList = __webpack_require__(30);
+	var _listContactList = __webpack_require__(27);
 	
 	var _listContactList2 = _interopRequireDefault(_listContactList);
 	
-	var _showContactShow = __webpack_require__(34);
-	
-	var _showContactShow2 = _interopRequireDefault(_showContactShow);
-	
-	var _contactsComponent = __webpack_require__(37);
+	var _contactsComponent = __webpack_require__(31);
 	
 	var _contactsComponent2 = _interopRequireDefault(_contactsComponent);
 	
-	var _contactsController = __webpack_require__(39);
+	var _contactsController = __webpack_require__(33);
 	
 	var _contactsController2 = _interopRequireDefault(_contactsController);
 	
-	var _coreServicesContactsService = __webpack_require__(16);
+	var _contactsService = __webpack_require__(34);
 	
-	var _coreServicesContactsService2 = _interopRequireDefault(_coreServicesContactsService);
+	var _contactsService2 = _interopRequireDefault(_contactsService);
 	
 	console.log('contacts module');
-	exports['default'] = angular.module('contacts', [_formContactFormJs2['default'], _listContactList2['default'], _showContactShow2['default']]).config(["$stateProvider", function ($stateProvider) {
+	exports['default'] = angular.module('contacts', [_listContactList2['default']]).config(["$stateProvider", function ($stateProvider) {
 	  $stateProvider.state('contacts', {
-	    url: '/',
+	    url: '/contacts',
 	    template: '<contacts></contacts>'
 	  });
-	}]).factory('ContactsFactory', _coreServicesContactsService2['default']).component('contacts', _contactsComponent2['default']).controller('ContactsController', _contactsController2['default']).name;
+	}]).factory('ContactsFactory', _contactsService2['default']).component('contacts', _contactsComponent2['default']).controller('ContactsController', _contactsController2['default']).name;
 	module.exports = exports['default'];
 
 /***/ },
@@ -95513,27 +95457,20 @@
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
-	  value: true
+	    value: true
 	});
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _contactFormController = __webpack_require__(28);
+	var _contactListController = __webpack_require__(28);
 	
-	var _contactFormController2 = _interopRequireDefault(_contactFormController);
+	var _contactListController2 = _interopRequireDefault(_contactListController);
 	
-	var _contactFormHtml = __webpack_require__(29);
+	var _contactListComponent = __webpack_require__(29);
 	
-	var _contactFormHtml2 = _interopRequireDefault(_contactFormHtml);
+	var _contactListComponent2 = _interopRequireDefault(_contactListComponent);
 	
-	exports['default'] = angular.module('contact.create', []).config(["$stateProvider", function ($stateProvider) {
-	  $stateProvider.state('new', {
-	    url: '/new',
-	    template: _contactFormHtml2['default'],
-	    controller: 'ContactFormController',
-	    controllerAs: 'vm'
-	  });
-	}]).controller('ContactFormController', _contactFormController2['default']).name;
+	exports['default'] = angular.module('contact-list', []).component(_contactListComponent2['default'], 'contactList').controller(_contactListController2['default'], 'ContactListController').name;
 	module.exports = exports['default'];
 
 /***/ },
@@ -95548,92 +95485,17 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var ContactFormController = function ContactFormController(ContactsFactory, $mdToast) {
-	  _classCallCheck(this, ContactFormController);
-	
-	  console.log('ContactFormController');
-	  var date = new Date();
-	  var vm = this;
-	  vm.save = save;
-	  vm.isEditing = false;
-	
-	  vm.minDate = new Date(date.getFullYear() - 100, date.getMonth(), date.getDate());
-	  vm.maxDate = new Date(date.getFullYear() - 10, date.getMonth(), date.getDate());
-	
-	  function save() {
-	    vm.contact.birthday = vm.birthday.toJSON();
-	    ContactsFactory.save(vm.contact).then(function () {
-	      vm.contact = {};
-	      showToast();
-	    });
-	  }
-	
-	  function showToast() {
-	    $mdToast.show($mdToast.simple().textContent('Contact saved succesfully...').position({
-	      bottom: false,
-	      top: true,
-	      left: false,
-	      right: true
-	    }).hideDelay(3000));
-	  }
-	};
-	
-	exports['default'] = ContactFormController;
-	module.exports = exports['default'];
-
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	module.exports = "<form name=\"contactForm\" ng-submit=\"vm.save()\">\n  <div layout=\"row\">\n    <md-input-container class=\"md-block\" flex-gt-sm>\n      <label>Name</label>\n      <input ng-model=\"vm.contact.name\">\n    </md-input-container>\n    <md-datepicker ng-model=\"vm.birthday\"\n      md-placeholder=\"Birthday\"\n      md-min-date=\"vm.minDate\"\n      md-max-date=\"vm.maxDate\">\n    </md-datepicker>\n  </div>\n  <md-input-container class=\"md-block\">\n    <label>Email</label>\n    <input ng-model=\"vm.contact.email\">\n  </md-input-container>\n  <md-input-container class=\"md-block\">\n    <label><i class=\"fa fa-twitter fa-lg\"></i> @Twitter</label>\n    <input ng-model=\"vm.contact.twitter\">\n  </md-input-container>\n  <md-input-container class=\"md-block\">\n    <label>Address</label>\n    <input ng-model=\"vm.contact.address\">\n  </md-input-container>\n  <md-input-container class=\"md-block\">\n    <label>About yourself</label>\n    <textarea ng-model=\"vm.contact.sumary\" md-maxlength=\"150\" rows=\"5\"></textarea>\n  </md-input-container>\n  <md-button class=\"md-raised md-primary\" type=\"submit\">Save</md-button>\n</form>\n      <!--<div ng-if=\"vm.showAddMap\">-->\n      <!--  <ui-gmap-google-map-->\n      <!--    center=\"vm.map.center\"-->\n      <!--    zoom=\"vm.map.zoom\"-->\n      <!--    dragging=\"vm.map.dragging\"-->\n      <!--    bounds=\"vm.map.bounds\"-->\n      <!--    events=\"vm.map.events\"-->\n      <!--    options=\"vm.map.options\"-->\n      <!--    pan=\"true\"-->\n      <!--    control=\"vm.map.control\">-->\n          \n      <!--   <ui-gmap-search-box-->\n      <!--      template='<input type=\"text\" placeholder=\"Search...\">'-->\n      <!--      position=\"TOP_LEFT\">-->\n      <!--    </ui-gmap-search-box>-->\n\n      <!--  </ui-gmap-google-map>-->\n      <!--</div>-->"
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _contactListController = __webpack_require__(31);
-	
-	var _contactListController2 = _interopRequireDefault(_contactListController);
-	
-	var _contactListComponent = __webpack_require__(32);
-	
-	var _contactListComponent2 = _interopRequireDefault(_contactListComponent);
-	
-	exports['default'] = angular.module('contact-list', []).component('contactList', _contactListComponent2['default']).controller('ContactListController', _contactListController2['default']).name;
-	module.exports = exports['default'];
-
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var ContactListController = function ContactListController(ContactsFactory, $location, $state) {
+	var ContactListController = function ContactListController(ContactFactory) {
 	  _classCallCheck(this, ContactListController);
 	
 	  console.log('contact-list controller');
 	  var vm = this;
-	  vm.contacts = ContactsFactory.getContacts();
-	  vm.selected = {};
-	  vm.showContact = showContact;
+	  activate();
 	
-	  function showContact(selected) {
-	    console.log('selected: ', selected);
-	    $state.go('show', { id: selected.$id });
+	  function activate() {
+	    ContactFactory.getContacts().then(function (data) {
+	      console.log(data);
+	    });
 	  }
 	};
 	
@@ -95641,7 +95503,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 32 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95652,7 +95514,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _contactListHtml = __webpack_require__(33);
+	var _contactListHtml = __webpack_require__(30);
 	
 	var _contactListHtml2 = _interopRequireDefault(_contactListHtml);
 	
@@ -95667,13 +95529,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 33 */
+/* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "<md-list>\n  <md-list-item ng-repeat=\"contact in vm.contacts\">\n    <md-button\n      ng-click=\"vm.showContact(contact)\"\n      ng-class=\"{'selected' : contact === vm.selected }\">\n        <i class=\"fa fa-user fa-lg\"></i>\n        <!--<md-icon md-svg-icon=\"{{contact.avatar}}\" class=\"avatar\"></md-icon>-->\n        {{contact.name}}\n      </md-button>\n  </md-list-item>\n</md-list>"
+	module.exports = "<md-list>\n  <md-list-item ng-repeat=\"contact in vm.contacts\">\n    <md-button ng-click=\"vm.showContact(contact)\" ng-class=\"{'selected' : contact === vm.selected }\">\n        <md-icon md-svg-icon=\"{{contact.avatar}}\" class=\"avatar\"></md-icon>\n        {{contact.name}}\n      </md-button>\n  </md-list-item>\n</md-list>"
 
 /***/ },
-/* 34 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95684,91 +95546,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _contactShowController = __webpack_require__(35);
-	
-	var _contactShowController2 = _interopRequireDefault(_contactShowController);
-	
-	var _contactShowHtml = __webpack_require__(36);
-	
-	var _contactShowHtml2 = _interopRequireDefault(_contactShowHtml);
-	
-	exports['default'] = angular.module('contact.show', []).config(["$stateProvider", function ($stateProvider) {
-	  $stateProvider.state('show', {
-	    url: '/show/:id',
-	    template: _contactShowHtml2['default'],
-	    controller: 'ContactShowController',
-	    controllerAs: 'vm'
-	  });
-	}]).controller('ContactShowController', _contactShowController2['default']).name;
-	module.exports = exports['default'];
-
-/***/ },
-/* 35 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var ContactFormController = function ContactFormController($firebaseArray, ContactsFactory, $stateParams, $mdToast) {
-	  _classCallCheck(this, ContactFormController);
-	
-	  console.log('ContactShowController');
-	  var date = new Date();
-	  var vm = this;
-	  ContactsFactory.getContacts().$loaded(function (contacts) {
-	    vm.contact = contacts.$getRecord($stateParams.id);
-	    vm.contact.birthday = new Date(vm.contact.birthday);
-	  });
-	  vm.update = update;
-	
-	  vm.minDate = new Date(date.getFullYear() - 100, date.getMonth(), date.getDate());
-	  vm.maxDate = new Date(date.getFullYear() - 10, date.getMonth(), date.getDate());
-	
-	  function update() {
-	    vm.contact.birthday = vm.contact.birthday.toJSON();
-	    ContactsFactory.update(vm.contact).then(function () {
-	      vm.isEditing = false;
-	      showToast();
-	    });
-	  }
-	
-	  function showToast() {
-	    $mdToast.show($mdToast.simple().textContent('Contact updated succesfully...').position({
-	      bottom: false,
-	      top: true,
-	      left: false,
-	      right: true
-	    }).hideDelay(3000));
-	  }
-	};
-	
-	exports['default'] = ContactFormController;
-	module.exports = exports['default'];
-
-/***/ },
-/* 36 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n  <h1>Contact Details</h1>\n</div>\n\n<form ng-if=\"vm.contact\" name=\"contactForm\" ng-submit=\"vm.update()\">\n  <div layout=\"row\">\n    <md-input-container class=\"md-block\" flex-gt-sm>\n      <label><i class=\"fa fa-male fa-lg\"></i> Name</label>\n      <input ng-disabled=\"!vm.isEditing\" ng-model=\"vm.contact.name\">\n    </md-input-container>\n    <md-datepicker ng-disabled=\"!vm.isEditing\" ng-model=\"vm.contact.birthday\"\n      md-placeholder=\"Birthday\"\n      md-min-date=\"vm.minDate\"\n      md-max-date=\"vm.maxDate\">\n    </md-datepicker>\n  </div>\n  <md-input-container class=\"md-block\">\n    <label><i class=\"fa fa-envelope fa-lg\"></i> Email</label>\n    <input ng-disabled=\"!vm.isEditing\" ng-model=\"vm.contact.email\">\n  </md-input-container>\n  <md-input-container class=\"md-block\">\n    <label><i class=\"fa fa-twitter fa-lg\"></i> @Twitter</label>\n    <input ng-disabled=\"!vm.isEditing\" ng-model=\"vm.contact.twitter\">\n  </md-input-container>\n  <md-input-container class=\"md-block\">\n    <label><i class=\"fa fa-map-marker fa-lg\"></i> Address</label>\n    <input ng-disabled=\"!vm.isEditing\" ng-model=\"vm.contact.address\">\n  </md-input-container>\n  <md-input-container class=\"md-block\">\n    <label><i class=\"fa fa-heart fa-lg\"></i> About yourself</label>\n    <textarea ng-disabled=\"!vm.isEditing\"\n      ng-model=\"vm.contact.sumary\"\n      md-maxlength=\"100\"\n      rows=\"5\">\n    </textarea>\n  </md-input-container>\n  <md-button ng-if=\"!vm.isEditing\" ng-click=\"vm.isEditing = true\"\n    class=\"md-raised md-primary\" type=\"button\">\n    Edit\n  </md-button>\n  <md-button ng-if=\"vm.isEditing\" class=\"md-raised md-primary\" type=\"submit\">\n    Update\n    </md-button>\n</form>\n\n<div ng-if=\"!vm.contact\">\n  <h5>No data found...</h5>\n</div>"
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _contactsHtml = __webpack_require__(38);
+	var _contactsHtml = __webpack_require__(32);
 	
 	var _contactsHtml2 = _interopRequireDefault(_contactsHtml);
 	
@@ -95781,13 +95559,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 38 */
+/* 32 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"row\">\n  <h3 class=\"ng-binding\">My Contacts ({{vm.contacts.length}})</h3>\n  \n    <table>\n      <thead>\n        <tr>\n          <th><i class=\"fa fa-male\"></i> Name</th>\n          <th><i class=\"fa fa-twitter\"></i> Twitter</th>\n          <th><i class=\"fa fa-envelope\"></i> Email</th>\n          <th><i class=\"fa fa-birthday-cake\"></i> Birthday</th>\n          <th width=\"10%\"></th>\n        </tr>\n      </thead>\n      <tr ng-repeat=\"contact in vm.contacts\">\n        <td><a ng-click=\"vm.showContact(contact)\">{{contact.name}}</a></td>\n        <td>\n          <a ng-href=\"https://twitter.com/{{contact.twitter}}\" target=\"_blank\">\n            <i class=\"fa fa-at\"></i>{{contact.twitter}}\n            <small><i class=\"fa fa-external-link\"></i></small>\n          </a>\n        </td>\n        <td>{{contact.email}}</td>\n        <td>{{contact.birthday | date: 'dd/MM/yyyy'}}</td>\n        <td>\n          <md-button class=\"md-icon-button md-warn\" md-click=\"vm.remove(contact)\">\n            <i class=\"fa fa-trash fa-lg\"></i>\n          </md-button>\n        </td>\n      </tr>\n    </table>\n</div>"
+	module.exports = "<div class=\"row\">\n  <div class=\"large-10 columns\">\n    \n    <div class=\"row\" ng-if=\"vm.contactShow\">\n      <div class=\"panel\">\n        <h3>{{vm.contact.name}}</h3>\n        <ul>\n          <li><strong>Company</strong>:{{vm.contact.company}}</li>\n          <li><strong>Email</strong>:{{vm.contact.email}}</li>\n          <h5>Phone Numbers</h5>\n          <li><strong>Home</strong>:{{vm.homePhone}}</li>\n          <li><strong>Work</strong>:{{vm.workPhone}}</li>\n          <li><strong>Mobile</strong>:{{vm.mobilePhone}}</li>\n          <h5>Location Info</h5>\n          <li>{{vm.streetAddress}}</li>\n          <li>{{vm.city}}, {{vm.state}}, {{vm.zipcode}}</li>\n        </ul>\n      </div>\n    </div>\n    \n    <div class=\"callout success\" ng-if=\"vm.msg\">\n      <button class=\"close-button\" aria-label=\"Close alert\" type=\"button\" ng-click=\"vm.msg = '';\">\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n      <p>{{vm.msg}}</p>\n    </div>\n    \n    <!--Add Contact-->\n    <form ng-if=\"vm.isAddFormShown\" ng-submit=\"vm.addFormSubmit()\">\n      <h2>Add Contact</h2>\n      <div class=\"row\">\n        <div class=\"large-6 columns\">\n          <label>Name:\n            <input type=\"text\" name=\"name\" ng-model=\"vm.contact.name\" placeholder=\"Contact Name\" required/>\n          </label>\n        </div>\n        <div class=\"large-6 columns\">\n          <label>Email:\n            <input type=\"text\" name=\"email\" ng-model=\"vm.contact.email\" placeholder=\"Contact Email\" required/>\n          </label>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"large-6 columns\">\n          <label>Company:\n            <input type=\"text\" name=\"company\" ng-model=\"vm.contact.company\" placeholder=\"Company Name\"/>\n          </label>\n        </div>\n        <div class=\"large-6 columns\">\n          <label>Work Phone:\n            <input type=\"text\" name=\"work_phone\" ng-model=\"vm.workPhone\" placeholder=\"Work Phone\"/>\n          </label>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"large-6 columns\">\n          <label>Mobile Phone:\n            <input type=\"text\" name=\"mobile_phone\" ng-model=\"vm.mobilePhone\" placeholder=\"Mobile Phone\"/>\n          </label>\n        </div>\n        <div class=\"large-6 columns\">\n          <label>Home Phone:\n            <input type=\"text\" name=\"home_phone\" ng-model=\"vm.homePhone\" placeholder=\"Home Phone\"/>\n          </label>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"large-12 columns\">\n          <label>Address:\n            <input type=\"text\" name=\"address\" ng-model=\"vm.contact.address\" placeholder=\"Address\"/>\n          </label>\n          <a ng-click=\"vm.showAddMap = !vm.showAddMap\">Show map</a>\n        </div>\n      </div>\n      <div ng-if=\"vm.showAddMap\">\n        <ui-gmap-google-map\n          center=\"vm.map.center\"\n          zoom=\"vm.map.zoom\"\n          dragging=\"vm.map.dragging\"\n          bounds=\"vm.map.bounds\"\n          events=\"vm.map.events\"\n          options=\"vm.map.options\"\n          pan=\"true\"\n          control=\"vm.map.control\">\n          \n         <ui-gmap-search-box\n            template='<input type=\"text\" placeholder=\"Search...\">'\n            position=\"TOP_LEFT\">\n          </ui-gmap-search-box>\n\n        </ui-gmap-google-map>\n      </div>\n      <md-button type=\"submit\">Save</md-button>\n    </form>\n    \n    \n    <!--Edit Contact-->\n    <form ng-if=\"vm.editFormShow\" ng-submit=\"vm.editFormSubmit()\">\n      <h2>Edit Contact</h2>\n      <div class=\"row\">\n        <div class=\"large-6 columns\">\n          <label>Name:\n            <input type=\"text\" name=\"name\" ng-model=\"vm.contact.name\" placeholder=\"Contact Name\" required/>\n          </label>\n        </div>\n        <div class=\"large-6 columns\">\n          <label>Email:\n            <input type=\"text\" name=\"email\" ng-model=\"vm.contact.email\" placeholder=\"Contact Email\" required/>\n          </label>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"large-6 columns\">\n          <label>Company:\n            <input type=\"text\" name=\"company\" ng-model=\"vm.contact.company\" placeholder=\"Company Name\"/>\n          </label>\n        </div>\n        <div class=\"large-6 columns\">\n          <label>Work Phone:\n            <input type=\"text\" name=\"work_phone\" ng-model=\"vm.workPhone\" placeholder=\"Work Phone\"/>\n          </label>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"large-6 columns\">\n          <label>Mobile Phone:\n            <input type=\"text\" name=\"mobile_phone\" ng-model=\"vm.mobilePhone\" placeholder=\"Mobile Phone\"/>\n          </label>\n        </div>\n        <div class=\"large-6 columns\">\n          <label>Home Phone:\n            <input type=\"text\" name=\"home_phone\" ng-model=\"vm.homePhone\" placeholder=\"Home Phone\"/>\n          </label>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"large-12 columns\">\n          <label>Street Address:\n            <input type=\"text\" name=\"address\" ng-model=\"vm.contact.address\" placeholder=\"Address\"/>\n          </label>\n          <a ng-click=\"vm.showAddMap = !vm.showEditMap\">Show map</a>\n        </div>\n      </div>\n      <div if=\"vm.showEditMap\">\n        \n      </div>\n      <md-button type=\"submit\">Update</md-button>\n    </form>\n  \n    <h3>My Contacts ({{vm.contacts.length}})</h3>\n    <table>\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Company</th>\n          <th width=\"25%\">Email</th>\n          <th width=\"25%\">Actions</th>\n        </tr>\n      </thead>\n      <tr ng-repeat=\"contact in vm.contacts\">\n        <td> <a ng-click=\"vm.showContact(contact)\">{{contact.name}}</a> </td>\n        <td>{{contact.company}}</td>\n        <td>{{contact.email}}</td>\n        <td>\n          <a class=\"button tiny\" ng-click=\"vm.showEditForm(contact)\">Edit</a>\n          <a class=\"button tiny alert\" ng-click=\"vm.removeContact(contact)\">Delete</a>\n        </td>\n      </tr>\n    </table>\n  </div>\n  <div class=\"small-12 large-2 columns\">\n    <a class=\"button large\" ng-click=\"vm.showAddForm()\" ng-hide=\"vm.isAddFormShown\">+</a>\n    <a class=\"button large alert\" ng-click=\"vm.hide()\" ng-show=\"vm.isAddFormShown\">-</a>\n    <a class=\"button large alert\" ng-click=\"vm.hide()\" ng-show=\"vm.contactShow\">-</a>\n  </div>\n</div>"
 
 /***/ },
-/* 39 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -95798,34 +95576,163 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var ContactsController = function ContactsController(ContactsFactory, $state, $mdToast) {
+	var ContactsController = function ContactsController(dataService, uiGmapGoogleMapApi) {
 	  _classCallCheck(this, ContactsController);
 	
-	  // if maps enabled add: uiGmapGoogleMapApi
 	  console.log('ContactsController');
 	  var vm = this;
-	  vm.contacts = ContactsFactory.getContacts();
-	  vm.remove = removeContact;
+	  vm.contacts = dataService.getContacts();
+	  vm.addFormSubmit = addFormSubmit;
+	  vm.editFormSubmit = editFormSubmit;
+	  vm.showAddForm = showAddForm;
+	  vm.showEditForm = showEditForm;
+	  vm.hide = hideForms;
 	  vm.showContact = showContact;
+	  vm.removeContact = removeContact;
 	
-	  function removeContact(contact) {
-	    ContactsFactory.remove(contact);
+	  vm.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+	
+	  uiGmapGoogleMapApi.then(function (maps) {
+	    console.log('map ready');
+	  });
+	
+	  function showAddForm() {
+	    hideForms();
+	    vm.isAddFormShown = true;
+	    vm.contact = null;
+	    clearFields();
+	  }
+	
+	  function showEditForm(contact) {
+	    hideForms();
+	    vm.editFormShow = true;
+	    vm.contact = contact;
+	    vm.homePhone = contact.phones[0].home;
+	    vm.workPhone = contact.phones[0].work;
+	    vm.mobilePhone = contact.phones[0].mobile;
+	  }
+	
+	  function hideForms() {
+	    vm.isAddFormShown = false;
+	    vm.contactShow = false;
 	  }
 	
 	  function showContact(contact) {
-	    $state.go('show', { id: contact.$id });
+	    vm.contact = contact;
+	    vm.homePhone = contact.phones[0].home;
+	    vm.workPhone = contact.phones[0].work;
+	    vm.mobilePhone = contact.phones[0].mobile;
+	
+	    vm.contactShow = true;
 	  }
 	
-	  // uiGmapGoogleMapApi.then(function(maps) {
-	  //   console.log('map ready');
-	  // });
+	  function addFormSubmit() {
+	    setPhones(vm.contact);
+	    setAddress(vm.contact);
+	    dataService.add(vm.contact).then(function () {
+	      clearFields();
+	
+	      // hide form
+	      vm.isAddFormShown = false;
+	
+	      // send message to user
+	      vm.msg = 'Contact Added Successfully';
+	    });
+	  }
+	
+	  function editFormSubmit() {
+	    //get contact ID
+	    var id = vm.contact.$id;
+	
+	    // get record based on id
+	    var record = vm.contacts.$getRecord(id);
+	
+	    record = vm.contact;
+	    setPhones(record);
+	
+	    dataService.update(record).then(function () {
+	      clearFields();
+	      vm.editFormShow = false;
+	      vm.msg = "Contact updated successfully";
+	    });
+	  }
+	
+	  function removeContact(contact) {
+	    dataService.remove(contact).then(function () {
+	      vm.msg = 'Contact removed successfully';
+	    });
+	  }
+	
+	  function setPhones(contact) {
+	    contact.phones = [{
+	      home: vm.homePhone,
+	      work: vm.workPhone,
+	      mobile: vm.mobilePhone
+	    }];
+	  }
+	
+	  function clearFields() {
+	    vm.contact = null;
+	    vm.homePhone = null;
+	    vm.workPhone = null;
+	    vm.mobilePhone = null;
+	  }
 	};
 	
 	exports['default'] = ContactsController;
 	module.exports = exports['default'];
 
 /***/ },
-/* 40 */
+/* 34 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = contactFactory;
+	
+	function contactFactory($q) {
+	
+	  return {
+	    getContacts: getContacts
+	  };
+	
+	  function getContacts() {
+	    var users = [{
+	      name: 'Lia Lugo',
+	      avatar: 'svg-1',
+	      content: 'I love cheese, especially airedale queso. Cheese and biscuits halloumi cauliflower cheese cottage cheese swiss boursin fondue caerphilly. Cow port-salut camembert de normandie macaroni cheese feta who moved my cheese babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue castello caerphilly chalk and cheese. Lancashire.'
+	    }, {
+	      name: 'George Duke',
+	      avatar: 'svg-2',
+	      content: 'Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.'
+	    }, {
+	      name: 'Gener Delosreyes',
+	      avatar: 'svg-3',
+	      content: "Raw denim pour-over readymade Etsy Pitchfork. Four dollar toast pickled locavore bitters McSweeney's blog. Try-hard art party Shoreditch selfies. Odd Future butcher VHS, disrupt pop-up Thundercats chillwave vinyl jean shorts taxidermy master cleanse letterpress Wes Anderson mustache Helvetica. Schlitz bicycle rights chillwave irony lumberhungry Kickstarter next level sriracha typewriter Intelligentsia, migas kogi heirloom tousled. Disrupt 3 wolf moon lomo four loko. Pug mlkshk fanny pack literally hoodie bespoke, put a bird on it Marfa messenger bag kogi VHS."
+	    }, {
+	      name: 'Lawrence Ray',
+	      avatar: 'svg-4',
+	      content: 'Scratch the furniture spit up on light gray carpet instead of adjacent linoleum so eat a plant, kill a hand pelt around the house and up and down stairs chasing phantoms run in circles, or claw drapes. Always hungry pelt around the house and up and down stairs chasing phantoms.'
+	    }, {
+	      name: 'Ernesto Urbina',
+	      avatar: 'svg-5',
+	      content: 'Webtwo ipsum dolor sit amet, eskobo chumby doostang bebo. Bubbli greplin stypi prezi mzinga heroku wakoopa, shopify airbnb dogster dopplr gooru jumo, reddit plickers edmodo stypi zillow etsy.'
+	    }, {
+	      name: 'Gani Ferrer',
+	      avatar: 'svg-6',
+	      content: "Lebowski ipsum yeah? What do you think happens when you get rad? You turn in your library card? Get a new driver's license? Stop being awesome? Dolor sit amet, consectetur adipiscing elit praesent ac magna justo pellentesque ac lectus. You don't go out and make a living dressed like that in the middle of a weekday. Quis elit blandit fringilla a ut turpis praesent felis ligula, malesuada suscipit malesuada."
+	    }];
+	    return $q.when(users);
+	  }
+	}
+	
+	module.exports = exports['default'];
+
+/***/ },
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95836,11 +95743,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _appHtml = __webpack_require__(41);
+	var _appHtml = __webpack_require__(36);
 	
 	var _appHtml2 = _interopRequireDefault(_appHtml);
 	
-	__webpack_require__(42);
+	__webpack_require__(37);
 	
 	var appComponent = {
 	  template: _appHtml2['default'],
@@ -95851,22 +95758,22 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 41 */
+/* 36 */
 /***/ function(module, exports) {
 
-	module.exports = "<!-- Place all UI elements intended to be present across all routes in this file -->\n<md-toolbar layout=\"row\" layout-align=\"space-between start\" class=\"md-whiteframe-z1\">\n  <md-button id=\"main\" class=\"menu\" hide-gt-sm ng-click=\"vm.toggleLeft()\" ariallabel=\"Show Contact List\">\n    <md-icon md-svg-icon=\"menu\"></md-icon>\n  </md-button>\n  <h3>\n    <a ui-sref=\"contacts\" style=\"text-decoration: none; color: white\">\n      Sample app | Contacts\n    </a>\n  </h3>\n  <a style=\"text-decoration:none; color: black;\" href=\"https://github.com/cube5/contacts-app\">\n    <i class=\"fa fa-github-square fa-2x\"></i>\n  </a>\n</md-toolbar>\n\n<md-content ui-view layout=\"column\" layout-padding flex id=\"content\">\n  <a ui-sref=\"contacts\">See Contacts</a>\n</md-content>\n\n<!--<div class=\"app\">-->\n<!--  <div class=\"container\">-->\n<!--    <div class=\"row\">-->\n<!--      <div class=\"large-12 columns\">-->\n<!--        <h1>Contacts app</h1>-->\n<!--        <hr/>-->\n<!--      </div>-->\n<!--    </div>-->\n<!--    <div ui-view>-->\n<!--      <a ui-sref=\"contacts\">See Contacts</a>-->\n<!--    </div>-->\n<!--  </div>-->\n<!--</div>-->\n"
+	module.exports = "<!-- Place all UI elements intended to be present across all routes in this file -->\n<md-toolbar layout=\"row\" class=\"md-whiteframe-z1\">\n  <md-button id=\"main\" class=\"menu\" hide-gt-sm ng-click=\"vm.toggleLeft()\" ariallabel=\"Show Contact List\">\n    <md-icon md-svg-icon=\"menu\"></md-icon>\n  </md-button>\n  <h3>Contacts app</h3>\n</md-toolbar>\n\n<md-content flex id=\"content\">\n  <div ui-view>\n    <a ui-sref=\"contacts\">See Contacts</a>\n  </div>\n</md-content>\n\n<!--<div class=\"app\">-->\n<!--  <div class=\"container\">-->\n<!--    <div class=\"row\">-->\n<!--      <div class=\"large-12 columns\">-->\n<!--        <h1>Contacts app</h1>-->\n<!--        <hr/>-->\n<!--      </div>-->\n<!--    </div>-->\n<!--    <div ui-view>-->\n<!--      <a ui-sref=\"contacts\">See Contacts</a>-->\n<!--    </div>-->\n<!--  </div>-->\n<!--</div>-->\n"
 
 /***/ },
-/* 42 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(43);
+	var content = __webpack_require__(38);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(45)(content, {});
+	var update = __webpack_require__(40)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -95883,10 +95790,10 @@
 	}
 
 /***/ },
-/* 43 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(44)();
+	exports = module.exports = __webpack_require__(39)();
 	// imports
 	
 	
@@ -95897,7 +95804,7 @@
 
 
 /***/ },
-/* 44 */
+/* 39 */
 /***/ function(module, exports) {
 
 	/*
@@ -95953,7 +95860,7 @@
 
 
 /***/ },
-/* 45 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -96178,16 +96085,16 @@
 
 
 /***/ },
-/* 46 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(47);
+	var content = __webpack_require__(42);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(45)(content, {});
+	var update = __webpack_require__(40)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -96204,10 +96111,10 @@
 	}
 
 /***/ },
-/* 47 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(44)();
+	exports = module.exports = __webpack_require__(39)();
 	// imports
 	
 	
@@ -96218,16 +96125,16 @@
 
 
 /***/ },
-/* 48 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(49);
+	var content = __webpack_require__(44);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(45)(content, {});
+	var update = __webpack_require__(40)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -96244,10 +96151,10 @@
 	}
 
 /***/ },
-/* 49 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(44)();
+	exports = module.exports = __webpack_require__(39)();
 	// imports
 	
 	
@@ -96258,16 +96165,16 @@
 
 
 /***/ },
-/* 50 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(51);
+	var content = __webpack_require__(46);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(45)(content, {});
+	var update = __webpack_require__(40)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -96284,10 +96191,10 @@
 	}
 
 /***/ },
-/* 51 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(44)();
+	exports = module.exports = __webpack_require__(39)();
 	// imports
 	
 	
@@ -96296,12 +96203,6 @@
 	
 	// exports
 
-
-/***/ },
-/* 52 */
-/***/ function(module, exports) {
-
-	module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 24 24\">\n    <path d=\"M0 0h24v24h-24z\" fill=\"none\"/>\n    <path d=\"M3 18h18v-2h-18v2zm0-5h18v-2h-18v2zm0-7v2h18v-2h-18z\"/>\n</svg>\n"
 
 /***/ }
 /******/ ]);

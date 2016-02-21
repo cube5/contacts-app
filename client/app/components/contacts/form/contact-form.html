@@ -1,0 +1,48 @@
+<form name="contactForm" ng-submit="vm.save()">
+  <div layout="row">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Name</label>
+      <input ng-model="vm.contact.name">
+    </md-input-container>
+    <md-datepicker ng-model="vm.birthday"
+      md-placeholder="Birthday"
+      md-min-date="vm.minDate"
+      md-max-date="vm.maxDate">
+    </md-datepicker>
+  </div>
+  <md-input-container class="md-block">
+    <label>Email</label>
+    <input ng-model="vm.contact.email">
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label><i class="fa fa-twitter fa-lg"></i> @Twitter</label>
+    <input ng-model="vm.contact.twitter">
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>Address</label>
+    <input ng-model="vm.contact.address">
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>About yourself</label>
+    <textarea ng-model="vm.contact.sumary" md-maxlength="150" rows="5"></textarea>
+  </md-input-container>
+  <md-button class="md-raised md-primary" type="submit">Save</md-button>
+</form>
+      <!--<div ng-if="vm.showAddMap">-->
+      <!--  <ui-gmap-google-map-->
+      <!--    center="vm.map.center"-->
+      <!--    zoom="vm.map.zoom"-->
+      <!--    dragging="vm.map.dragging"-->
+      <!--    bounds="vm.map.bounds"-->
+      <!--    events="vm.map.events"-->
+      <!--    options="vm.map.options"-->
+      <!--    pan="true"-->
+      <!--    control="vm.map.control">-->
+          
+      <!--   <ui-gmap-search-box-->
+      <!--      template='<input type="text" placeholder="Search...">'-->
+      <!--      position="TOP_LEFT">-->
+      <!--    </ui-gmap-search-box>-->
+
+      <!--  </ui-gmap-google-map>-->
+      <!--</div>-->

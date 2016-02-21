@@ -1,0 +1,11 @@
+<md-list>
+  <md-list-item ng-repeat="contact in vm.contacts">
+    <md-button
+      ng-click="vm.showContact(contact)"
+      ng-class="{'selected' : contact === vm.selected }">
+        <i class="fa fa-user fa-lg"></i>
+        <!--<md-icon md-svg-icon="{{contact.avatar}}" class="avatar"></md-icon>-->
+        {{contact.name}}
+      </md-button>
+  </md-list-item>
+</md-list>

@@ -1,27 +1,20 @@
 <!-- Place all UI elements intended to be present across all routes in this file -->
-<md-toolbar layout="row" class="md-whiteframe-z1">
+<md-toolbar layout="row" layout-align="space-between start" class="md-whiteframe-z1">
   <md-button id="main" class="menu" hide-gt-sm ng-click="vm.toggleLeft()" ariallabel="Show Contact List">
-    <md-icon md-svg-icon="menu"></md-icon>
+    <i class="fa fa-bars fa-lg"></i>
+    <!--<md-icon md-svg-icon="menu"></md-icon>-->
   </md-button>
-  <h3>Contacts app</h3>
+  <h3>
+    <a ui-sref="contacts" style="text-decoration: none; color: white">
+      Sample app | Contacts
+    </a>
+  </h3>
+  <a style="text-decoration:none; color: black;" href="https://github.com/cube5/contacts-app">
+    <i class="fa fa-github-square fa-lg"></i>
+  </a>
 </md-toolbar>
 
-<md-content flex id="content">
-  <div ui-view>
-    <a ui-sref="contacts">See Contacts</a>
-  </div>
+<md-content ui-view layout="column" layout-padding flex id="content">
+  <a ui-sref="contacts">See Contacts</a>
 </md-content>
 
-<!--<div class="app">-->
-<!--  <div class="container">-->
-<!--    <div class="row">-->
-<!--      <div class="large-12 columns">-->
-<!--        <h1>Contacts app</h1>-->
-<!--        <hr/>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div ui-view>-->
-<!--      <a ui-sref="contacts">See Contacts</a>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->

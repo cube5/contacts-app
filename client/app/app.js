@@ -3,7 +3,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import angularComponent from 'angular-component';
-import Common from './common/common';
+import Core from './core/core';
 import Components from './components/components';
 import AppComponent from './app.component';
 
@@ -15,10 +15,10 @@ console.log('app module')
 angular.module('app', [
   uiRouter,
   ngMaterial,
-  Common.name,
-  Components.name
+  Core,
+  Components
 ])
-.config(($urlRouterProvider, $mdThemingProvider) => {
+.config(($urlRouterProvider, $mdThemingProvider, $mdIconProvider) => {
   $urlRouterProvider.otherwise('/');
   
   $mdThemingProvider.theme('default')
